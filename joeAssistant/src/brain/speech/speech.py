@@ -1,23 +1,24 @@
 from playsound import playsound
-import pyaudio
 from gtts import gTTS
 import os
 
 
-def startRecordingSound():
-    playsound('..\\media\\startRecording.mp3')
+class Speech:
 
+    def __init__(self):
+        self._start_recording_sound = "startRecording.mp3"
+        self._stop_recording_sound = "stopRecording.mp3"
+        self._response_assistant = "response.mp3"
+        self._language = "es"
 
-def stopRecordingSound():
-    playsound('..\\media\\stopRecording.mp3')
+    def start_recording_sound(self):
+        playsound(self._start_recording_sound)
 
+    def stopRecordingSound(self):
+        playsound(self._stop_recording_sound)
 
-def assistantSays(text):
-    speechObject = gTTS(text=text, lang="es", slow=False)
-    speechObject.save("response.mp3")
-    playsound('response.mp3')
-    os.remove('response.mp3')
-
-
-if __name__ == "__main__":
-    print(os.getcwd())
+    def assistant_says(self, txt):
+        speechObject = gTTS(text=txt, lang=self._language, slow=False)
+        speechObject.save(self._response_assistant)
+        playsound(self._response_assistant)
+        os.remove(self._response_assistant)
