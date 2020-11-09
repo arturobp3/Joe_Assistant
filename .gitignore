@@ -3,3 +3,6 @@
 
 # Virtual Environment
 venv/
+
+# Auth credentials for third party libraries
+joeAssistant/src/auth_credentials.py

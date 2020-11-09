@@ -1,11 +1,39 @@
+import speech_recognition as sr
+from wit import Wit
+
+from joeAssistant.src import auth_credentials as auth
 from joeAssistant.src.brain.languageProcessing.pocketsphinxRecorder import PocketSphinxRecorder
+from joeAssistant.src.brain.languageProcessing.exceptions.exceptions import NoRequestHeardError, \
+    LanguageProcessingGeneralError, UnintelligibleRequestError
 
 
 class LanguageProcessing:
 
     def __init__(self):
-        self.pocketsphinx_recorder = PocketSphinxRecorder()
+        self._pocketsphinx_recorder = PocketSphinxRecorder()
+        self._wit_client = Wit(auth.WIT_CLIENT_ACCESS_TOKEN)
 
-    def listen_trigger(self):
+    def listen_trigger(self) -> bool:
         print("Passive listening...")
-        return self.pocketsphinx_recorder.listen_trigger()
+        return self._pocketsphinx_recorder.record_trigger()
+
+    def listen_voice_request(self) -> str:
+        voice_request = ""
+        try:
+            voice_request = self._pocketsphinx_recorder.record_voice_request()
+        except sr.WaitTimeoutError:
+            print("No request heard")
+            raise NoRequestHeardError("")
+        except sr.UnknownValueError:
+            print("language processing general error")
+            raise LanguageProcessingGeneralError("Actualmente no puedo hacer eso.")
+        except sr.RequestError:
+            print("peticion no se entiende")
+            raise UnintelligibleRequestError("Perdona, no he podido entender lo que has dicho.")
+
+        return voice_request
+
+    def parse(self, request: str) -> dict:
+        return self._wit_client.get_message(request)
+
+
