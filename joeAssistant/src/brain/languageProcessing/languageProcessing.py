@@ -11,7 +11,7 @@ class LanguageProcessing:
 
     def __init__(self):
         self._pocketsphinx_recorder = PocketSphinxRecorder()
-        self._wit_client = Wit(auth.WIT_CLIENT_ACCESS_TOKEN)
+        self._wit_client = Wit(auth.WIT_SERVER_ACCESS_TOKEN)
 
     def listen_trigger(self) -> bool:
         print("Passive listening...")
@@ -26,10 +26,10 @@ class LanguageProcessing:
             raise NoRequestHeardError("")
         except sr.UnknownValueError:
             print("language processing general error")
-            raise LanguageProcessingGeneralError("Actualmente no puedo hacer eso.")
+            raise LanguageProcessingGeneralError("Perdona, no he podido entender lo que has dicho.")
         except sr.RequestError:
             print("peticion no se entiende")
-            raise UnintelligibleRequestError("Perdona, no he podido entender lo que has dicho.")
+            raise UnintelligibleRequestError("Actualmente no puedo hacer eso.")
 
         return voice_request
 
