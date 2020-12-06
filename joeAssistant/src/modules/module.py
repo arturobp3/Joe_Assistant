@@ -6,19 +6,19 @@ from abc import ABC, abstractmethod
 class Module(ABC):
 
     @abstractmethod
-    def start(self) -> str:
+    def start(self, request: dict) -> str:
         pass
 
     @abstractmethod
-    def stop(self) -> str:
+    def stop(self, request: dict) -> str:
         pass
 
     @abstractmethod
-    def update(self) -> str:
+    def update(self, request: dict) -> str:
         pass
 
     @abstractmethod
-    def pause(self) -> str:
+    def pause(self, request: dict) -> str:
         pass
 
     @abstractmethod

@@ -1,78 +1,86 @@
-# facade design pattern para todas las funcionalidades de spotify
-from abc import ABC
 from typing import Tuple
 
 from joeAssistant.src.modules.module import Module
-from joeAssistant.src.modules.spotify.src import SpotifyController as sc
+from joeAssistant.src.modules.spotify.src import spotifyController as sc
+from joeAssistant.src.modules.spotify.src.decorators import login_required
 
 USERNAME = "arturobp"
 
-
-# TODO: HACER FUNCIONES CON UN DECORATOR
 
 class Spotify(Module):
 
     def __init__(self):
         self.spotify_controller = sc.SpotifyController()
 
-    def start(self) -> Tuple[bool, str]:
-        if self.spotify_controller.login(USERNAME):
-            if self.spotify_controller.start():
-                return True, "Reproduciendo música de Spotify"
-            else:
-                return False, "Ejecuta Spotify primero"
+    @login_required
+    def start(self, request: dict) -> Tuple[bool, str]:
+        if self.spotify_controller.start():
+            return True, "Reproduciendo música de Spotify"
         else:
-            return False, "No se ha podido iniciar sesión en Spotify"
+            return False, "Ejecuta Spotify primero"
 
-    def stop(self) -> str:
+    @login_required
+    def stop(self, request: dict) -> str:
         pass
 
-    def update(self) -> str:
+    @login_required
+    def pause(self, request: dict) -> Tuple[bool, str]:  # TODO: HACER COMANDO EN WIT.AI
+        self.spotify_controller.pause()
+        return True, ""
+
+    @login_required
+    def update(self, request: dict) -> str:
         pass
 
-    def pause(self) -> str:
-        # pause_playback
+    @login_required
+    def repeat(self, request: dict) -> str:  # TODO: HACER COMANDO EN WIT.AI
         pass
 
-    def repeat(self, mode) -> str:
+    @login_required
+    def next_track(self, request: dict) -> Tuple[bool, str]:
+        self.spotify_controller.next_track()
+        return True, ""
+
+    @login_required
+    def previous_track(self, request: dict) -> Tuple[bool, str]:
+        self.spotify_controller.previous_track()
+        return True, ""
+
+    @login_required
+    def turn_down_volume(self, request: dict) -> Tuple[bool, str]:
+        self.spotify_controller.turn_down_volume()
+        return True, ""
+
+    @login_required
+    def turn_up_volume(self, request: dict) -> Tuple[bool, str]:
+        self.spotify_controller.turn_up_volume()
+        return True, ""
+
+    def currently_playing(self, request: dict):  # TODO: HACER COMANDO EN WIT.AI
         pass
 
-    def next_track(self) -> Tuple[bool, str]:
-        if self.spotify_controller.login(USERNAME):
-            self.spotify_controller.next_track()
-            return True, ""
+    @login_required
+    def play_song(self, request: dict) -> Tuple[bool, str]:  # TODO: HACER COMANDO EN WIT.AI
+        success, (song, artist) = self.spotify_controller.play_song(request)
+        if success:
+            return True, "Reproduciendo {} de {}".format(song, artist)
         else:
-            return False, "Primero ejecuta Spotify en tu ordenador"
+            return False, "No se ha encontrado la canción {} de {}".format(song, artist)
 
-    def previous_track(self) -> Tuple[bool, str]:
-        if self.spotify_controller.login(USERNAME):
-            self.spotify_controller.previous_track()
-            return True, ""
-        else:
-            return False, "Primero ejecuta Spotify en tu ordenador"
+    def play_album(self, request: dict):  # TODO: HACER COMANDO EN WIT.AI
+        pass
 
-    def turn_down_volume(self) -> Tuple[bool, str]:
-        if self.spotify_controller.login(USERNAME):
-            self.spotify_controller.turn_down_volume()
-            return True, ""
-        else:
-            return False, "Primero ejecuta Spotify en tu ordenador"
+    def play_artist(self, request: dict):  # TODO: HACER COMANDO EN WIT.AI
+        pass
 
-    def turn_up_volume(self) -> Tuple[bool, str]:
-        if self.spotify_controller.login(USERNAME):
-            self.spotify_controller.turn_up_volume()
-            return True, ""
-        else:
-            return False, "Primero ejecuta Spotify en tu ordenador"
+    def play_playlist(self, request: dict):  # TODO: HACER COMANDO EN WIT.AI
+        pass
 
-    def minimum_volume(self):
-        self.spotify_controller.minimum_volume()
-
-    def restore_volume(self):
-        self.spotify_controller.restore_volume()
+    def add_song_to_queue(self, request: dict):  # TODO: HACER COMANDO EN WIT.AI
+        pass
 
     def activate_before_joe_speaks(self):
-        self.minimum_volume()
+        self.spotify_controller.minimum_volume()
 
     def activate_after_joe_speaks(self):
-        self.restore_volume()
+        self.spotify_controller.restore_volume()

@@ -1,0 +1,87 @@
+{
+  "tracks": {
+    "href": "https://api.spotify.com/v1/search?query=artist%3Akhalid+track%3Abetter&type=track&offset=0&limit=1",
+    "items": [
+      {
+        "album": {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
+              },
+              "href": "https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny",
+              "id": "6LuN9FCkKOj5PcnpouEgny",
+              "name": "Khalid",
+              "type": "artist",
+              "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/6Nd4PYvQ7aYid1Gn6sWgeG"
+          },
+          "href": "https://api.spotify.com/v1/albums/6Nd4PYvQ7aYid1Gn6sWgeG",
+          "id": "6Nd4PYvQ7aYid1Gn6sWgeG",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b27397bbd3ef27fe0b40b36f8002",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e0297bbd3ef27fe0b40b36f8002",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d0000485197bbd3ef27fe0b40b36f8002",
+              "width": 64
+            }
+          ],
+          "name": "Better",
+          "release_date": "2018-09-14",
+          "release_date_precision": "day",
+          "total_tracks": 1,
+          "type": "album",
+          "uri": "spotify:album:6Nd4PYvQ7aYid1Gn6sWgeG"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
+            },
+            "href": "https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny",
+            "id": "6LuN9FCkKOj5PcnpouEgny",
+            "name": "Khalid",
+            "type": "artist",
+            "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 229412,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "USRC11803179"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/4T3fNx3CgwDRRYgmFCbD4J"
+        },
+        "href": "https://api.spotify.com/v1/tracks/4T3fNx3CgwDRRYgmFCbD4J",
+        "id": "4T3fNx3CgwDRRYgmFCbD4J",
+        "is_local": false,
+        "name": "Better",
+        "popularity": 73,
+        "preview_url": "https://p.scdn.co/mp3-preview/8177b402d2016ff5e4cca8e5e45e214abca5b2e3?cid=774b29d4f13844c495f206cafdad9c86",
+        "track_number": 1,
+        "type": "track",
+        "uri": "spotify:track:4T3fNx3CgwDRRYgmFCbD4J"
+      }
+    ],
+    "limit": 1,
+    "next": "https://api.spotify.com/v1/search?query=artist%3Akhalid+track%3Abetter&type=track&offset=1&limit=1",
+    "offset": 0,
+    "previous": null,
+    "total": 10
+  }
+}
